@@ -10,6 +10,6 @@ Given a list of strings, find the list of strings which start with letter I in t
 
 Program3
 
-Given a Map and Double find total purchase cost including taxes by iterating through the Map using lambda expression
+Given a Map and Double find total purchase cost including taxes by iterating through the Map using lambda expression.
 
 
