@@ -1,25 +1,21 @@
 package com.stackroute;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
 public class CartCheckout {
     public static BigDecimal billGenerator(Map<String, BigDecimal> groceryItems, Double tax) {
-        System.out.println(groceryItems)
+        System.out.println(groceryItems);
         //lambda expression to calculate sum of total groceries
-        BillGenerate totalPrice = (value, sum) -> sum.add(value);
+        BillGenerate totalPrice = (value, sum) -> (value.divide(BigDecimal.valueOf(100)).multiply(sum)).add(sum);
         BigDecimal sum = new BigDecimal("0");
         BigDecimal result = new BigDecimal("0");
         if ((!groceryItems.isEmpty()) && (tax > 0)) {
             for (BigDecimal value : groceryItems.values()) {
-                System.out.println(totalPrice.billGenerate(sum, value));
-                return totalPrice.billGenerate(sum,value);
                 sum = sum.add(value);
             }
             BigDecimal newTax = new BigDecimal(tax);
-            System.out.println(totalPrice.billGenerate(sum, newTax));
+            System.out.println(totalPrice.billGenerate(newTax,sum));
             System.out.println(totalPrice);
         }//checks whether the items in the cart is empty or tax is null or negative
         else if (groceryItems.isEmpty() || tax == null || tax < 0) {
@@ -34,7 +30,6 @@ public class CartCheckout {
         }
         return null;
     }
-
     public static void main(String[] args) {
         Map<String, BigDecimal> groceryItems = new HashMap<>();
         Scanner reader = new Scanner(System.in);
@@ -51,6 +46,5 @@ public class CartCheckout {
         //reads tax percentage from user
         Double tax = reader.nextDouble();
         billGenerator(groceryItems, tax);
-
     }
 }
